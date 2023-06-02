@@ -70,7 +70,7 @@ if platform.system() != 'Windows':
 from models.experimental import attempt_load
 from models.yolo import ClassificationModel, Detect, DetectionModel, SegmentationModel
 from utils.dataloaders import LoadImages
-from utils.general import (LOGGER, Profile, check_dataset, check_img_size, check_requirements, check_version,
+from utils.general import (LOGGER, Profile, check_dataset, check_img_size, check_version,
                            check_yaml, colorstr, file_size, get_default_args, print_args, url2file, yaml_save)
 from utils.torch_utils import select_device, smart_inference_mode
 
@@ -285,6 +285,7 @@ def export_engine(model, im, file, half, dynamic, simplify, workspace=4, verbose
     else:  # TensorRT >= 8
         check_version(trt.__version__, '8.0.0', hard=True)  # require tensorrt>=8.0.0
         export_onnx(model, im, file, 12, dynamic, simplify)  # opset 12
+
     onnx = file.with_suffix('.onnx')
 
     LOGGER.info(f'\n{prefix} starting export with TensorRT {trt.__version__}...')
